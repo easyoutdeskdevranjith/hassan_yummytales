@@ -89,3 +89,16 @@ include 'header.php';
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+
+
+
+
+ var allowedExtensions = /(\.jpg|\.jpeg)$/i;
+                       for(var i=0;i<files.length; i++)
+                       { 
+                       if (!allowedExtensions.exec(files[i].name))
+                       {
+                      alert('Please select a JPG or JPEG image file.');
+                      return false;
+                       } 

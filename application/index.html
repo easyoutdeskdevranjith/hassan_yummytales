@@ -9,3 +9,97 @@
 
 </body>
 </html>
+
+
+<?php 
+$id ='';
+$Foodname ='';
+$Price ='';
+$Image ='';
+$errorMessage ='';
+$SuccesMessage='';
+ if($_SERVER['REQUEST_METHOD']== 'GET'){
+  if([isset($_GET["Sno"])]){
+    header("location:/Food/insertdata.php");
+    exit;
+  }
+  $Sno =$_GET["Sno"];
+  $sql ="SELECT * FROM food_data WHERE Sno=$Sno";
+  $result *$connection->query($sql);
+  $row =$result->fetch_assoc();
+  if(!$item) {
+    header("location:/Food/insertdata.php");
+    exit;
+  }
+  $id=$item["id"];
+  $Foodname=$item["Foodname"];
+  $Price=$item["Price"];
+  $Image=$item["Image"];
+}
+
+
+ else{
+  $=$iidtem["id"];
+  $Foodname=$item["Foodname"];
+  $Price=$item["Price"];
+  $Image=$item["Image"];
+  
+  do{
+    if(empty($id)|| empty($Foodname) || empty($Price)|| empty($Image) ){ ($errorMessage ="All the fields are required");
+    break;
+  }
+  $sql= "UPDATE food_data". 
+  "SET id = '$id', Foodname ='$Foodname',  Price ='$Price',  Image ='$Image'". 
+  "WHERE Sno=$Sno";
+  $result =$connection->query($sql);
+  if(!$result) {
+    $errorMessage ="Invalid query:" .$connection->error;
+    break;
+  }
+  $succesMessage ="food_data updated correctly";
+  header ("location: /Food/insertdata.php");
+  exit;
+ 
+  } while(true);
+ }
+?>
+
+
+
+
+
+$id = $_GET["id"];
+$sql = "SELECT * FROM food_data WHERE id=$id";
+$result = $connection->query($sql);
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $id = $row["id"];
+    $Foodname = $row["Foodname"];
+    $Price = $row["Price"];
+    $Image = $row["Image"]; -->
+} else { -->
+    // header("location: /Food/Addfood.php");
+    // exit;
+}
+} else {
+$id = $_POST["id"];
+$Foodname = $_POST["Foodname"];
+$Price = $_POST["Price"];
+$Image = $_POST["Image"];
+
+if (empty($id) || empty($Foodname) || empty($Price) || empty($Image)) {
+    $errorMessage = "All the fields are required";
+} else {
+
+    $stmt = $connection->prepare("UPDATE food_data SET id=?, Foodname=?, Price=?, Image=? WHERE id=?");
+    $stmt->bind_param("ssssi", $id, $Foodname, $Price, $Image, );
+    if ($stmt->execute()) {
+        $successMessage = "food_data updated correctly";
+        header("location: /Food/Addfood.php");
+        exit;
+    } else {
+        $errorMessage = "Error updating food_data: " . $connection->error;
+    }
+}
+}
+?>

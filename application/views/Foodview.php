@@ -104,7 +104,7 @@ include 'header.php';
       <td><?= $item['Price']; ?></td>
       <td>
        <a href="<?php echo base_url('Addfood/' .$item['Id']); ?>"class="btn btn-primary">Edit</a>
-      <a href="<?php echo base_url('Addfood/'. $item['Id']); ?>"class="btn btn-danger"> Delete</a>
+      <a href="<?php echo base_url('Deletefood/'. $item['Id']); ?>"class="btn btn-danger delete-button"> Delete</a>
     </td>
    
   </tr>

@@ -1,0 +1,159 @@
+<div class="container">
+        <div style="background-color: violet; width: 100%; padding:10px; border-radius;5px;">
+        <h1>AGENDA TO DO</h1>
+        <div class="input-container">
+            <input type="text" id="task" placeholder="Add a new task">
+            <button id="add-button">Add</button>
+        </div>
+
+
+
+
+
+
+
+
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>To-Do List</title>
+    <style>
+      body {
+        
+         font-family: Arial, sans-serif;
+         background-color:#f4f4f4;
+         margin: 0;
+         padding: 0;
+         height:100vh;
+         display:flex;
+         justify-content:center;
+         align-items:center;
+        
+    }
+
+    .container {
+        max-width: 600px;
+        height:500px;
+        margin: 0 auto;
+        background-color: #0088CBA
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        width:100%;
+        
+    }
+    
+    h1 {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+        background-color:orange;
+        padding:10px;
+        border-radius: 5px;
+        color:white;
+    }
+    
+     .input-container {
+        display: flex;
+        margin-bottom: 10px;
+    }
+    
+       input[type="text"] {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    
+        button {
+        padding: 10px 20px;
+        background-color: #008CBA;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 5px;
+        background-color: #f9f9f9;
+    }
+    
+    .delete-button {
+        background-color: #ff3333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+    .error {
+            border: 1px solid blue;
+            background-color: #FFAFAF;
+            }
+  </style>
+    
+</head>
+<body>
+    <div class="container">
+        <h1 style="background-color: orange; padding: 10px; border-radius: 5px; color: white;">AGENDA TO DO</h1>
+        <div class="input-container">
+            <input type="text" id="task" placeholder="Add a new task">
+            <button id="add-button">Add</button>
+        </div>
+        <ul id="task-list">
+            </ul>
+         </div>
+        
+    <script src="script.js"></script>
+    <script>
+   
+    const taskInput = document.getElementById('task');
+    const addButton = document.getElementById('add-button');
+    const taskList = document.getElementById('task-list');
+    
+   
+    function addTask() {
+        const taskText = taskInput.value.trim();
+        if (taskText !== '') {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                ${taskText}
+                <button class="delete-button">Delete</button>
+            `;
+            taskList.appendChild(li);
+    
+           
+            taskInput.value = '';
+            const deleteButton = li.querySelector('.delete-button');
+            deleteButton.addEventListener('click', () => {
+                taskList.removeChild(li);
+            });
+        }
+    }
+    
+     addButton.addEventListener('click', addTask);
+     taskInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            addTask();
+        }
+    });
+  </script>
+</body>
+</html>

@@ -45,7 +45,7 @@ include 'header.php';
                                            <div class="form-group">
                                          <!-- /.card-header -->
                                           <!-- form start -->
-                                       <form id="myForm"  action="<?php echo base_url();?>Food/Addae" method="POST" enctype="multipart/form-data">
+                                       <form id="myForm"  action="" method="POST" enctype="multipart/form-data">
                                      <div class="form-group">
                                      <label for="FoodName">FoodName</label>
                                     <input type="text" class="form-control" id="FoodName" name="FoodName" placeholder="" 
@@ -145,8 +145,7 @@ include 'header.php';
                         alert('Please select a file before checking the extension.');
                         return false;
                       }
-        
-                      if (files[i].size >2048) {
+                     if (files[i].size >2048) {
                       alert('Please select an image file below 2 KB in size.');
                       return false;
                        }
@@ -163,36 +162,42 @@ include 'header.php';
                    });
                  });
                  </script>
-                <script src= "<?php echo base_url();?>assets/jquery/jquery.min.js"></script> 
-     <script>
-    $(document).ready(function () {
-       $('#deleteButton').click(function () {
-            var Id = $('#Id').val();
-             var confirmation = confirm('Are you sure you want to delete?');
+                <script src= "<?php echo base_url();?>assets/jquery/jquery.min.js"></script>
+                <script>
+            $(document).ready(function() {
+            $('.delete-button').on('click', function(e) {
+            e.preventDefault(); // Prevent the default link behavior
+              var deleteUrl = $(this).attr('href');
+           if (confirm('Are you sure you want to delete this item?')) {
+                // Perform the delete operation using AJAX
+                $.ajax({
+                    type: "POST", // You can use POST or DELETE method
+                    url: deleteUrl,
+                    success: function(response) {
+                        // Handle success response if needed
+                        // For example, you can update the UI to reflect the deleted item
+                        console.log(response);
 
-            if (confirmation) {
-                  $.ajax({
-                    type: "POST",
-                    url: "<?php echo base_url(); ?>Food/delete_food/" + Id,
-                    success: function (response) {
-                        alert('Food deleted successfully.'); // You can display a success message
-                   },
-                    error: function (xhr, status, error) {
-                        alert('Failed to delete food.'); // Handle the error
+                        // Optionally, you can reload the page or do any other action
+                        // window.location.reload(); // Reload the page
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle errors if the delete operation fails
+                        console.error(error);
                     }
                 });
-            }
+                 }
         });
     });
 </script>
-              </div>
-                  </div>
-                     </div>
-                       </div>
-                           </div>
-                              </section>
-                                   </div>
-                                       </div>
+ </div>
+  </div>
+  </div>
+   </div>
+    </div>
+    </section>
+    </div>
+     </div>
 
     
                

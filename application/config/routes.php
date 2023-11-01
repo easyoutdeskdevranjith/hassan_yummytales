@@ -58,8 +58,10 @@ $route['404_override']='';
 $route['translate_uri_dashes']='FALSE';
 $route['default']='';
 $route['Addfood']='Food/Addae';
+$route['Deletefood']='Food/Deletefood';
 
 $route['Addfood/(:num)']='Food/Addae/$1';
+$route['Deletefood/(:num)']='Food/Deletefood/$1';
 $route['404_override']='';
 $route['translate_uri_dashes']='FALSE';
 $route['Food/insertdata']='Food/insert_data';
@@ -69,6 +71,9 @@ $route['Useradmin/foodview'] = 'Useradmin/foodview';
 $route['edit_food/(:num)']= 'FoodController/edit/$1';
 $route['delete_food/(:num)']='FoodController/delete/$1';
 $route['food/add']='Food/Addae';
+$route['food/delete']='Food/Deletefood';
+
+
 
 
 
