@@ -5,29 +5,20 @@ Class Food extends CI_Controller
     { 
     // print_r($this->input->get()); exit;
         $this->load->database();
-        $page=1;
-        $page_input= $this->input->get('page');
-            if($page_input) {
-               $page=max(1,(int)$page_input);
-        }
-          $query = $this->db->get('food_data');
-          $data['food_data'] = $query->result_array();
-          $this->load->view('Foodview', $data);
-          $total_records =54;
-          $records_per_page =10;
-          $offset =($page-1) * $records_per_page;
-
-         $this->db->limit($records_per_page,$offset);
-         $query= $this->db->get('food_data');
-         $data['food_data']= $query->result_array();
-         $total_records =$this->db->count_all('food_data');
-         $total_pages=ceil($total_records/ $records_per_page);
-         $data['totalPages']=$total_pages;
-         //echo"<pre>";
-        //print_r($data); exit;
+      
+        $page= $this->input->get('page') ?(int) $this->input->get('page') :1;
+       $records_per_page =10;
+       $offset =($page-1) *$records_per_page;
+       $this->db->limit($records_per_page,$offset);
+       $query =$this->db->get('food_data');
+       $data['food_data'] =$query->result_array();
+       $total_records =$this->db->count_all('food_data');
+        $total_pages =ceil($total_records/ $records_per_page);
+        $data['currentPage'] =$page;
+        $data['totalPages'] =$total_pages;
+        
         $this->load->view('Foodview', $data);
     }
-  
 
     //  public function Addfood()
     //  {
@@ -157,22 +148,26 @@ Class Food extends CI_Controller
     {
 
     }
-   public function Delete_food($id="")
+   public function Delete_food()
    {
-      if(!empty($id)){
-       $this->load->database();
-       $this->db->where('Id',$id);
-      // echo($id);
-       //exit();
-       $this->db->delete('food_data');
-       $this->load->view('food_ae',$data);
-       if($this->db->affected_rows()>0)
+    $IDDelete =$this->input->post('IDDelete');
+      $this->load->database(); 
+
+      if(!empty($IDDelete)){
+        $this->db->where('Id', $IDDelete);
+        $this->db->delete('food_data');
+      
+        if($this->db->affected_rows()>0)
        {
         redirect(base_url("Addfood"));
        } 
     }
   }
-  }
+   }
+  
+   
+   
+
 
 
 

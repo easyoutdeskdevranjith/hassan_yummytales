@@ -90,29 +90,28 @@ include 'header.php';
                       <th>ACTIONS</th>
                       </tr>
                      </thead>
-                  
-                      </tbody>
+                   </tbody>
                       
-                      <?php
+                    <?php
                      $Sno = 1;
                    foreach ($food_data as $index => $item) {
                       ?>
-        <tr>
-      <td><?= $Sno; ?></td>
-      <td><img src= "<?= base_url('uploader/'.$item['Image']); ?>" alt= ""width="90" height="90"></td>
-      <td><?= $item['Foodname']; ?></td>
-      <td><?= $item['Price']; ?></td>
+                <tr>
+         <td><?= $Sno; ?></td>
+         <td><img src= "<?= base_url('uploader/'.$item['Image']); ?>" alt= ""width="90" height="90"></td>
+        <td><?= $item['Foodname']; ?></td>
+        <td><?= $item['Price']; ?></td>
       <td>
        <a href="<?php echo base_url('Addfood/' .$item['Id']); ?>"class="btn btn-primary">Edit</a>
-      <a href="<?php echo base_url('Deletefood/'. $item['Id']); ?>"class="btn btn-danger delete-button"> Delete</a>
+      <a href="<?php echo base_url('Deletefood/'. $item['Id']); ?>"class="btn btn-danger delete-button" data-id="<?php echo $item['Id']; ?>"> Delete</a>
+
     </td>
-   
-  </tr>
-<?php
-  $Sno++;
+   </tr>
+   <?php
+   $Sno++;
          }
-?>
-</table>
+    ?>
+  </table>
  <td>
  <div class="pagination">
     <?php if (1> 1): ?>
@@ -138,9 +137,8 @@ include 'header.php';
     <?php endif; ?>
 </div>
     </div>
-
-    <style>
-    /* Your existing styles here */
+  <style>
+    
     
     .pagination {
         display: flex;
@@ -191,8 +189,32 @@ include 'header.php';
           <!-- /.col -->
 
   
-      <?php
-     include 'footer.php';
-     ?>
+          <?php
+          include 'footer.php';
+          ?>
+            <script src= "<?php echo base_url();?>assets/jquery/jquery.min.js"></script>
+            <script>
+               $(document).ready(function() {
+                alert('Data has been deleted successfully');
+                $('.delete-button').on('click', function(e) {
+               e.preventDefault(); 
+               var Delete_id =$(this).attr('data-id');
+               alert(Delete_id);
+              if (confirm('Are you sure you want to delete this item?')) {
+              $.ajax({
+                    type: "POST", 
+                    url: '<?php echo base_url('Food/Delete_food');?>',
+                    data:{IDDelete: Delete_id},
+                    success: function(response) {
+                    console.log(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                       }
+                });
+                 }
+        });
+    });
+</script>
      
   

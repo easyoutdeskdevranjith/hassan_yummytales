@@ -31,10 +31,10 @@ include 'header.php';
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
+           <section class="content">
+            <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
-            <div class=" row "> 
+                <div class=" row "> 
                 <div class="col-sm-12">
                                  <!-- general form elements -->
                                      <div class="card card-primary">
@@ -55,7 +55,6 @@ include 'header.php';
                                     <span id="FoodName" style="color:red;"></span>
                                     </div>
                           
-                                    
                               <div class="form-group">
                               <label for="price">FoodPrice</label>
                            <input type="text" class="form-control" id="FoodPrice" name="FoodPrice" placeholder="Enter Price [0-9]+"
@@ -64,7 +63,7 @@ include 'header.php';
                           <span id="FoodPricespan" style="color:red;"></span>
                           </div>
 
-                         <div class="form-group">
+                       <div class="form-group">
                          <label for="FoodImage">FoodImage</label>
                          <input type="file" class="form-control" id="FoodImage" name="FoodImage" accept=".jpg, .jpeg">
                          
@@ -79,10 +78,10 @@ include 'header.php';
                         </form>
                         <script src= "<?php echo base_url();?>assets/jquery/jquery.min.js"></script>
                         <script>
-                        $(document).ready(function ()
+                       $(document).ready(function ()
                         {
                          $('#myForm').submit(function) (event){
-                       alert('Form submitted successfully!');
+                         alert('Form submitted successfully!');
                           event.preventDefault();
                           var FoodNameInput = $('#FoodName');
                           var FoodPriceInput = $('#FoodPrice');
@@ -91,25 +90,25 @@ include 'header.php';
             
                           var alphabetValidationMessage = $('#alphabetValidationMessage');
                           var FoodPriceError = $('#FoodPriceError');
-                          var files=FoodImageInput[0].files;
-                          console.log(files);
+                          var files= FoodImageInput[0].files;
+                         
 
                           FoodNameInput.removeClass('error');
                           FoodPriceInput.removeClass('error');
                           FoodImageInput.removeClass('error');
 
-                         alphabetValidationMessage.text('');
-                         FoodPriceError.text('');
-                         if ($.trim(FoodNameInput.val()) == ''){
-                         alphabetValidationMessage.text('FoodName is required.');
-                         return false;
-                        } else {
-                        alphabetValidationMessage.text('');
-                        }
+                          alphabetValidationMessage.text('');
+                          FoodPriceError.text('');
+                          if ($.trim(FoodNameInput.val()) == ''){
+                          alphabetValidationMessage.text('FoodName is required.');
+                          return false;
+                          } else {
+                          alphabetValidationMessage.text('');
+                          }
                         if ($.trim(FoodPriceInput.val()) == '' || !/^[0-9]+$/.test(FoodPriceInput.val())) {
-                        FoodPriceError.text('Please enter a valid number for Food Price.');
-                        return false;
-                        } else {
+                           FoodPriceError.text('Please enter a valid number for Food Price.');
+                             return false;
+                           } else {
                         alphabetValidationMessage.text('');
                         }
                        var allowedExtensions = /(\.jpg|\.jpeg)$/i;
@@ -120,17 +119,17 @@ include 'header.php';
                       alert('Please select a JPG or JPEG image file.');
                       return false;
                        } 
-                     <?php
-                     if(isset($food_itemedit) && isset($food_itemedit['Image']))
-                    {
-                    ?> 
+                      <?php
+                      if(isset($food_itemedit) && isset($food_itemedit['Image']))
+                     {
+                     ?> 
                       if(files.length == 0)
                         {
                         alert('Please select an image file.');
                         return false;
                         }
                         
-                      <?php } ?>
+                       <?php } ?>
                         var allowedExtensions = /(\.jpg|\.jpeg)$/i;
                        for(var i=0;i<files.length; i++)
                        { 
@@ -140,7 +139,7 @@ include 'header.php';
                       return false;
                        } 
                        } 
-                      }
+                      } 
                       else {
                         alert('Please select a file before checking the extension.');
                         return false;
@@ -152,46 +151,17 @@ include 'header.php';
                       var reader = new FileReader();
                       reader.onload=function(e){
                       console.log(e.target.result);
-          
-                     thumbnail.attr('src',e.target.result);
+                      thumbnail.attr('src',e.target.result);
                       };
                      reader.readAsDataURL(files[i]);
                       }
                    alert('Form submitted successfully!');
                     return true; 
                    });
-                 });
+                  });
                  </script>
-                <script src= "<?php echo base_url();?>assets/jquery/jquery.min.js"></script>
-                <script>
-            $(document).ready(function() {
-            $('.delete-button').on('click', function(e) {
-            e.preventDefault(); // Prevent the default link behavior
-              var deleteUrl = $(this).attr('href');
-           if (confirm('Are you sure you want to delete this item?')) {
-                // Perform the delete operation using AJAX
-                $.ajax({
-                    type: "POST", // You can use POST or DELETE method
-                    url: deleteUrl,
-                    success: function(response) {
-                        // Handle success response if needed
-                        // For example, you can update the UI to reflect the deleted item
-                        console.log(response);
-
-                        // Optionally, you can reload the page or do any other action
-                        // window.location.reload(); // Reload the page
-                    },
-                    error: function(xhr, status, error) {
-                        // Handle errors if the delete operation fails
-                        console.error(error);
-                    }
-                });
-                 }
-        });
-    });
-</script>
- </div>
-  </div>
+                </div>
+              </div>
   </div>
    </div>
     </div>
